@@ -1,0 +1,10 @@
+E:/__________UNI/Market/OrderBook/build/CMakeFiles/MarketGui.dir
+E:/__________UNI/Market/OrderBook/build/CMakeFiles/INSTALL.dir
+E:/__________UNI/Market/OrderBook/build/CMakeFiles/ALL_BUILD.dir
+E:/__________UNI/Market/OrderBook/build/CMakeFiles/ZERO_CHECK.dir
+E:/__________UNI/Market/OrderBook/build/_deps/glfw-build/CMakeFiles/uninstall.dir
+E:/__________UNI/Market/OrderBook/build/_deps/glfw-build/CMakeFiles/INSTALL.dir
+E:/__________UNI/Market/OrderBook/build/_deps/glfw-build/CMakeFiles/ALL_BUILD.dir
+E:/__________UNI/Market/OrderBook/build/_deps/glfw-build/src/CMakeFiles/update_mappings.dir
+E:/__________UNI/Market/OrderBook/build/_deps/glfw-build/src/CMakeFiles/glfw.dir
+E:/__________UNI/Market/OrderBook/build/_deps/glfw-build/src/CMakeFiles/INSTALL.dir
