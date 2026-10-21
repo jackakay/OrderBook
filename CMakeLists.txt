@@ -38,6 +38,11 @@ add_executable(MarketGui
     src/ui_interface.cpp
     src/ui_interface.h
     src/glad.c
+    src/ImPlot/implot.cpp
+    src/ImPlot/implot_items.cpp
+    src/ImPlot/implot_internal.h
+    src/ImPlot/implot.h
+
     ${imgui_SOURCE_DIR}/imgui.cpp
     ${imgui_SOURCE_DIR}/imgui_demo.cpp
     ${imgui_SOURCE_DIR}/imgui_draw.cpp

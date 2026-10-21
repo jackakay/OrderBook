@@ -37,6 +37,7 @@ int main() {
     // Initialize ImGui
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
+    ImPlot::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     ImGui::StyleColorsDark();
 
@@ -67,7 +68,7 @@ int main() {
 
         // Render UI
         ui.render(order_book);
-
+        ui.plot_graph();
         // Rendering execution
         ImGui::Render();
         int display_w, display_h;
@@ -84,7 +85,7 @@ int main() {
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
-
+    ImPlot::DestroyContext();
     glfwDestroyWindow(window);
     glfwTerminate();
 
