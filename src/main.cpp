@@ -9,8 +9,6 @@
 
 #include "order_book.h"
 #include "ui_interface.h"
-#include <thread>
-#include <chrono>
 
 int main() {
     if (!glfwInit())
@@ -20,7 +18,7 @@ int main() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow* window = glfwCreateWindow(1280, 720, "C++ Matching Engine & LOB", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(1600, 900, "C++ Matching Engine & LOB", NULL, NULL);
     if (!window) {
         glfwTerminate();
         return -1;
@@ -46,20 +44,15 @@ int main() {
 
     OrderBook order_book;
     UIInterface ui;
-
-
-    auto last_run_time = std::chrono::steady_clock::now();
-    const auto interval = std::chrono::milliseconds(200); //We dont need to add orders every frame.
+    
+    ui.setup(order_book); // fonts + theme, before the first frame builds the font atlas
+    
     // Main application loop
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
 
-        
-        //Only want to add new orders every {interval} milliseconds, not ever frame
-        if(std::chrono::steady_clock::now() - last_run_time >= interval) {
-            order_book.simulateIncomingFlow();
-            last_run_time = std::chrono::steady_clock::now();
-        }
+        // Places simulated orders at the rate set in the UI and expires old ones
+        order_book.update();
 
         // Start ImGui frame
         ImGui_ImplOpenGL3_NewFrame();
@@ -68,13 +61,12 @@ int main() {
 
         // Render UI
         ui.render(order_book);
-        ui.plot_graph();
         // Rendering execution
         ImGui::Render();
         int display_w, display_h;
         glfwGetFramebufferSize(window, &display_w, &display_h);
         glViewport(0, 0, display_w, display_h);
-        glClearColor(0.12f, 0.14f, 0.18f, 1.0f);
+        glClearColor(0.07f, 0.08f, 0.11f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -84,8 +76,8 @@ int main() {
     // Cleanup
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
+    ImPlot::DestroyContext(); // ImPlot must go before the ImGui context it depends on
     ImGui::DestroyContext();
-    ImPlot::DestroyContext();
     glfwDestroyWindow(window);
     glfwTerminate();
 

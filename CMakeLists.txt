@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(MarketGui CXX)
+project(MarketGui C CXX) # C is needed for glad.c
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -59,5 +59,8 @@ target_include_directories(MarketGui PRIVATE
     ${imgui_SOURCE_DIR}/backends
 )
 
+# Fonts are loaded at runtime from the repo's fonts/ folder
+target_compile_definitions(MarketGui PRIVATE FONT_DIR="${CMAKE_CURRENT_SOURCE_DIR}/fonts")
+
 # Link everything together
-target_link_libraries(MarketGui PRIVATE glfw OpenGL::GL)
+target_link_libraries(MarketGui PRIVATE glfw OpenGL::GL)
